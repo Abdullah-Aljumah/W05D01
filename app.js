@@ -54,22 +54,22 @@ app.put("/updateCompelete/:id", (req, res) => {
 // change isComplete manual
 app.put("/updateCompelete/:id/:isComplete", (req, res) => {
   const { id, taskName, isComplete } = req.params;
-  id = Number(id);
+
 
   todo.splice(id, 1, { id, taskName: todo[id].taskName, isComplete });
 
   res.status(200);
-  res.json({ id, taskName, isComplete });
+  res.json({ id,  taskName: todo[id].taskName, isComplete });
 });
 
 // delete obj base on id
 app.delete("/delete/:id", (req, res) => {
-  const { id, taskName } = req.params;
+  const { id, taskName,isComplete } = req.params;
   console.log(id);
   todo.splice(id, 1);
 
   res.status(200);
-  res.json({ id, taskName });
+  res.json({"{deleted item is  ":{ id, taskName: todo[id].taskName,isComplete: todo[id].isComplete }});
 });
 
 // delete isCompelete = true
@@ -83,6 +83,15 @@ app.delete("/deleteCompelete", (req, res) => {
   todo = [...newArr];
   console.log(todo);
   res.status(200);
+  res.json("Delete all completed");
+});
+
+// delete All item in todo
+app.delete("/deleteAll", (req, res) => {
+  const newArr = [];
+  todo = [...newArr];
+  console.log(todo);
+  res.json("todo list is empty");
 });
 
 app.listen(port, () => {
