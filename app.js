@@ -31,7 +31,7 @@ app.post("/creat", (req, res) => {
 app.put("/update/:id/:taskName", (req, res) => {
   const { id, taskName } = req.params;
   console.log(id);
-  todo.splice(id, 1, { id, taskName, isComplete: false });
+  todo.splice(id, 1, { id, taskName, isComplete });
 
   res.status(200);
   res.json({ id, taskName });
