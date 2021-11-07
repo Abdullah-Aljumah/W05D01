@@ -55,21 +55,26 @@ app.put("/updateCompelete/:id", (req, res) => {
 app.put("/updateCompelete/:id/:isComplete", (req, res) => {
   const { id, taskName, isComplete } = req.params;
 
-
   todo.splice(id, 1, { id, taskName: todo[id].taskName, isComplete });
 
   res.status(200);
-  res.json({ id,  taskName: todo[id].taskName, isComplete });
+  res.json({ id, taskName: todo[id].taskName, isComplete });
 });
 
 // delete obj base on id
 app.delete("/delete/:id", (req, res) => {
-  const { id, taskName,isComplete } = req.params;
+  const { id, taskName, isComplete } = req.params;
   console.log(id);
   todo.splice(id, 1);
 
   res.status(200);
-  res.json({"{deleted item is  ":{ id, taskName: todo[id].taskName,isComplete: todo[id].isComplete }});
+  res.json({
+    "{deleted item is  ": {
+      id,
+      taskName: todo[id].taskName,
+      isComplete: todo[id].isComplete,
+    },
+  });
 });
 
 // delete isCompelete = true
